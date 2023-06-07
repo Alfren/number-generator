@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="wizard black and blue.ico" type="image/x-icon">
+  <title>Random Number Generator (Groups)</title>
+</head>
+
+<body>
+  <p style="margin: 0 auto 5px auto; font-size: 1rem; color: white;" class="text-center">Made with ❤ by Mein Mann,
+    Wizard</p>
+  <details class="flex content-center col" open>
+    <summary style="justify-content: center;">
+      <h4 class="text-center" style="padding: 8px 0;">Create New Group</h4>
+    </summary>
+    <div class="text-center" style="padding-top: 5px;">
+      <input type="text" name="groupName" id="groupName" value="" placeholder="Group Name"
+        class="input-field text-center" />
+    </div>
+    <div class="text-center" style="padding:8px 0;">
+      <input type="number" min="1" max="999" name="groupCount" placeholder="Total Count" id="groupCount"
+        class="input-field text-center" />
+    </div>
+    <div class="text-center" style="padding-bottom: 5px;">
+      <input type="button" class="btn" value="Create" onclick="makeGroup()" />
+    </div>
+  </details>
+  <div id="Groups">
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="script.js"></script>
+
+</html>
