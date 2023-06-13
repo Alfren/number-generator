@@ -66,7 +66,7 @@ async function readDatabase() {
   $("#groupName, #groupCount").val("");
   let groups = db.transaction(["Groups"], "readwrite").objectStore("Groups");
   let groupKeys = await groups.getAllKeys();
-  groupKeys.onsuccess = () => {
+  groupKeys.onsuccess = function () {
     if (groupKeys.result.length > 0) {
       groupKeys.result.map(async (group) => {
         groups.get(group).onsuccess = (event) => {
@@ -78,7 +78,6 @@ async function readDatabase() {
 }
 
 function createGroupOptions(object) {
-  console.log({ group: object });
   let id = object.name.replaceAll(" ", "_");
   let prev = "Used: ";
   object.count.forEach((num, i) => {
@@ -122,11 +121,10 @@ function revealNext(name) {
   let id = name.replaceAll(" ", "_");
   let groups = db.transaction(["Groups"], "readwrite").objectStore("Groups");
   groups.get(name).onsuccess = (event) => {
-    console.log(event.target);
     let item = event.target.result || {},
       count = item.count,
       next = item.next;
-    if (next < count?.length) {
+    if (next < count.length) {
       let prev = "Used: ";
       count.forEach((num, i) => {
         if (i <= next) prev += `${num}${i === next ? "" : ", "}`;
@@ -138,7 +136,7 @@ function revealNext(name) {
       groups.put({
         name: name,
         count: item.count,
-        next: item.next + 1 || count.length - 1,
+        next: item.next + 1 || item.count.length - 1,
       });
     } else {
       $("#nextUp_" + id).html(
@@ -176,4 +174,13 @@ function resetGroup(name) {
 function removeGroup(name) {
   db.transaction(["Groups"], "readwrite").objectStore("Groups").delete(name);
   readDatabase();
+}
+
+function systemReset() {
+  if (
+    confirm(`Reset system and remove all groups?\n\nClick "OK" to continue`)
+  ) {
+    window.indexedDB.deleteDatabase("School_Groups");
+    window.location.replace("/");
+  }
 }
