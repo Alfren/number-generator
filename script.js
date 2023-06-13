@@ -181,6 +181,6 @@ function systemReset() {
     confirm(`Reset system and remove all groups?\n\nClick "OK" to continue`)
   ) {
     window.indexedDB.deleteDatabase("School_Groups");
-    window.location.replace("/");
+    window.location.replace(window.location.href);
   }
 }
