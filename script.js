@@ -78,7 +78,7 @@ async function readDatabase() {
 }
 
 function createGroupOptions(object) {
-  console.log({ groups: object });
+  console.log({ group: object });
   let id = object.name.replaceAll(" ", "_");
   let prev = "Used: ";
   object.count.forEach((num, i) => {
@@ -122,7 +122,7 @@ function revealNext(name) {
   let id = name.replaceAll(" ", "_");
   let groups = db.transaction(["Groups"], "readwrite").objectStore("Groups");
   groups.get(name).onsuccess = (event) => {
-    console.log(event.target.result);
+    console.log(event.target);
     let item = event.target.result || {},
       count = item.count,
       next = item.next;
